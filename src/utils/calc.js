@@ -10,16 +10,19 @@ export function calcTotal(data) {
   return data.totalSavings || 0;
 }
 
-// 今日信息：直接从 data 读取
+// 今日信息：检查日期边界，跨天自动归零
 export function getTodayInfo(data) {
   const today = getToday();
   const checkedIn = !!data.checkins?.[today];
+  const isToday = data.todayDate === today;
+  const income = isToday ? (data.todayIncome || 0) : 0;
+  const expense = isToday ? (data.todayExpense || 0) : 0;
   return {
     today,
     checkedIn,
-    income: data.todayIncome || 0,
-    expense: data.todayExpense || 0,
-    net: (data.todayIncome || 0) - (data.todayExpense || 0),
+    income,
+    expense,
+    net: income - expense,
   };
 }
 

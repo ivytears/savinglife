@@ -288,23 +288,25 @@ export default function App() {
   const addItems = (items) => {
     if (!items?.length) return;
     const today = getToday();
+    const isNewDay = data.todayDate !== today;
     const expenseTotal = items.reduce((s, i) => s + (i.amount || 0), 0);
-    // 同时写入 expenses 以保留历史明细
     const prevItems = data.expenses?.[today]?.items || [];
+    const todayIncome = isNewDay ? 0 : (data.todayIncome || 0);
+    const todayExpense = (isNewDay ? 0 : (data.todayExpense || 0)) + expenseTotal;
     const nd = {
       ...data,
       totalSavings: (data.totalSavings || 0) - expenseTotal,
-      todayExpense: (data.todayExpense || 0) + expenseTotal,
+      todayIncome,
+      todayExpense,
       todayDate: today,
       expenses: { ...data.expenses, [today]: { items: [...prevItems, ...items] } },
     };
     save(nd);
     setManualAmt("");
     setManualNote("");
-    // 显示今日净收入动画
-    const net = (nd.todayIncome || 0) - (nd.todayExpense || 0);
+    const net = todayIncome - todayExpense;
     setWelcomeType("daily_summary");
-    setWelcomeExtra({ net, subText: `今日收入 ${fmtNum(nd.todayIncome || 0)} - 支出 ${fmtNum(nd.todayExpense || 0)}｜总储蓄 ${fmtNum(nd.totalSavings)}` });
+    setWelcomeExtra({ net, subText: `今日收入 ${fmtNum(todayIncome)} - 支出 ${fmtNum(todayExpense)}｜总储蓄 ${fmtNum(nd.totalSavings)}` });
     setShowWelcome(true);
   };
 
@@ -312,12 +314,13 @@ export default function App() {
   const addExtraIncome = (amount, note) => {
     if (!amount || amount <= 0) return;
     const today = getToday();
-    // 同时写入 extraIncomes 以保留历史明细
+    const isNewDay = data.todayDate !== today;
     const prevItems = data.extraIncomes?.[today]?.items || [];
     const nd = {
       ...data,
       totalSavings: (data.totalSavings || 0) + amount,
-      todayIncome: (data.todayIncome || 0) + amount,
+      todayIncome: (isNewDay ? 0 : (data.todayIncome || 0)) + amount,
+      todayExpense: isNewDay ? 0 : (data.todayExpense || 0),
       todayDate: today,
       extraIncomes: { ...data.extraIncomes, [today]: { items: [...prevItems, { amount, note: note || "额外收入" }] } },
     };
