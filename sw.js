@@ -1,5 +1,5 @@
 const CACHE_NAME = "savings-clock-v1";
-const PRECACHE_URLS = ["/", "/index.html"];
+const PRECACHE_URLS = ["./", "./index.html"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(
