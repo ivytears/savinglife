@@ -1112,7 +1112,7 @@ export default function App() {
 
       {/* ═══ 奖励 ═══ */}
       {view === "rewards" && (
-        <div style={{ animation: "slideIn 0.25s ease" }}>
+        <div style={{ animation: "fadeIn 0.25s ease" }}>
           <div className="page-header">
             <button className="back-btn" onClick={() => setView("home")}><IconChevronLeft size={24} /></button>
             <span className="page-title">奖励</span>
@@ -1120,42 +1120,59 @@ export default function App() {
 
           {/* 积分总览 */}
           <div className="card" style={{ textAlign: "center", padding: "32px 20px" }}>
-            <div style={{ fontSize: 48, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: "#3d3225" }}>
+            <div style={{ fontSize: 52, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: "#3d3225", lineHeight: 1 }}>
               {data.rewards?.totalPoints || 0}
             </div>
-            <div style={{ fontSize: 13, color: C.dim, marginTop: 4 }}>总积分</div>
-            <div style={{ marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 16px", borderRadius: 20, background: `${level.color}18`, color: level.color, fontSize: 13, fontWeight: 600 }}>
-              <IconTrophy size={14} color={level.color} />
+            <div style={{ fontSize: 12, color: C.dim, marginTop: 6, letterSpacing: 0.5 }}>总积分</div>
+            <div style={{ marginTop: 14, display: "inline-flex", alignItems: "center", gap: 6, padding: "7px 18px", borderRadius: 20, background: `${level.color}1a`, color: level.color, fontSize: 13, fontWeight: 700 }}>
+              <IconTrophy size={13} color={level.color} />
               {level.name}
             </div>
+            {level.description && (
+              <div style={{ fontSize: 12, color: "#b5a899", marginTop: 10, fontStyle: "italic", lineHeight: 1.6, maxWidth: 260, margin: "10px auto 0" }}>
+                {level.description}
+              </div>
+            )}
             {level.next && (
-              <div style={{ marginTop: 12 }}>
-                <div style={{ height: 4, borderRadius: 2, background: "#e2dbd0", overflow: "hidden" }}>
-                  <div style={{ height: "100%", width: `${level.progress * 100}%`, background: level.color, borderRadius: 2, transition: "width 0.3s" }} />
+              <div style={{ marginTop: 16 }}>
+                <div style={{ height: 6, borderRadius: 3, background: "#e2dbd0", overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: `${level.progress * 100}%`, background: level.color, borderRadius: 3, transition: "width 0.6s ease" }} />
                 </div>
-                <div style={{ fontSize: 11, color: "#b5a899", marginTop: 4 }}>距离下一等级还需 {level.next - (data.rewards?.totalPoints || 0)} 分</div>
+                <div style={{ fontSize: 11, color: "#b5a899", marginTop: 5 }}>距 {level.next} 分还差 {level.next - (data.rewards?.totalPoints || 0)} 分</div>
               </div>
             )}
           </div>
 
           {/* 统计 */}
           <div className="card">
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, textAlign: "center" }}>
-              <div>
-                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif" }}>{Object.keys(data.guitar || {}).length}</div>
-                <div style={{ fontSize: 11, color: C.dim, marginTop: 4 }}>弹琴总次数</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, textAlign: "center" }}>
+              <div style={{ padding: "8px 0" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
+                  <IconGuitar size={15} color={C.purple} />
+                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.purple }}>{Object.keys(data.guitar || {}).length}</div>
+                </div>
+                <div style={{ fontSize: 11, color: C.dim }}>弹琴总次数</div>
               </div>
-              <div>
-                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif" }}>{Object.keys(data.exercise || {}).length}</div>
-                <div style={{ fontSize: 11, color: C.dim, marginTop: 4 }}>锻炼总次数</div>
+              <div style={{ padding: "8px 0" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
+                  <IconDumbbell size={15} color={C.orange} />
+                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.orange }}>{Object.keys(data.exercise || {}).length}</div>
+                </div>
+                <div style={{ fontSize: 11, color: C.dim }}>锻炼总次数</div>
               </div>
-              <div>
-                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif" }}>{Object.values(data.sleep || {}).filter(s => s.valid).length}</div>
-                <div style={{ fontSize: 11, color: C.dim, marginTop: 4 }}>早睡总天数</div>
+              <div style={{ padding: "8px 0" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
+                  <IconMoon size={15} color={C.indigo} />
+                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.indigo }}>{Object.values(data.sleep || {}).filter(s => s.valid).length}</div>
+                </div>
+                <div style={{ fontSize: 11, color: C.dim }}>早睡总天数</div>
               </div>
-              <div>
-                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif" }}>{getConsecutiveSleepDays(data)}</div>
-                <div style={{ fontSize: 11, color: C.dim, marginTop: 4 }}>连续早睡</div>
+              <div style={{ padding: "8px 0" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
+                  <IconCheckCircle size={15} color={C.green} />
+                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.green }}>{getConsecutiveSleepDays(data)}</div>
+                </div>
+                <div style={{ fontSize: 11, color: C.dim }}>连续早睡</div>
               </div>
             </div>
           </div>
