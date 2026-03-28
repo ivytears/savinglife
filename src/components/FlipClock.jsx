@@ -18,6 +18,7 @@ function FlipDigit({ char, scale = 1 }) {
   }, [char]);
 
   const isSymbol = ",- ".includes(char);
+  // 更紧凑的尺寸，让数字能更大
   const baseW = isSymbol ? (char === "," ? 24 : char === " " ? 16 : 40) : 64;
   const baseH = 96;
   const baseFs = isSymbol ? 56 : 72;
@@ -40,7 +41,7 @@ function FlipDigit({ char, scale = 1 }) {
     fontWeight: 700,
     fontFamily: "-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif",
     backfaceVisibility: "hidden",
-    color: "#ffffff",
+    color: "#1a1a1a",
   };
 
   return (
@@ -54,27 +55,27 @@ function FlipDigit({ char, scale = 1 }) {
       }}
     >
       {/* 上半 */}
-      <div style={{ ...half, top: 0, background: "#1a3a4a", borderRadius: `${r}px ${r}px 0 0`, borderBottom: "1px solid #0f2027", alignItems: "flex-end" }}>
+      <div style={{ ...half, top: 0, background: "#fff", borderRadius: `${r}px ${r}px 0 0`, borderBottom: "1px solid #e5e5e5", alignItems: "flex-end" }}>
         <span style={{ transform: "translateY(50%)" }}>{display}</span>
       </div>
       {/* 下半 */}
-      <div style={{ ...half, bottom: 0, background: "#16323f", borderRadius: `0 0 ${r}px ${r}px`, alignItems: "flex-start", boxShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
+      <div style={{ ...half, bottom: 0, background: "#f8f8f8", borderRadius: `0 0 ${r}px ${r}px`, alignItems: "flex-start", boxShadow: "0 1px 2px rgba(0,0,0,0.06)" }}>
         <span style={{ transform: "translateY(-50%)" }}>{display}</span>
       </div>
       {/* 翻转上瓣 */}
       {flipping && (
-        <div style={{ ...half, top: 0, background: "#1a3a4a", borderRadius: `${r}px ${r}px 0 0`, alignItems: "flex-end", zIndex: 3, transformOrigin: "bottom center", animation: "flipTop 0.5s ease-in forwards" }}>
+        <div style={{ ...half, top: 0, background: "#fff", borderRadius: `${r}px ${r}px 0 0`, alignItems: "flex-end", zIndex: 3, transformOrigin: "bottom center", animation: "flipTop 0.5s ease-in forwards" }}>
           <span style={{ transform: "translateY(50%)" }}>{prev}</span>
         </div>
       )}
       {/* 翻转下瓣 */}
       {flipping && (
-        <div style={{ ...half, bottom: 0, background: "#16323f", borderRadius: `0 0 ${r}px ${r}px`, alignItems: "flex-start", zIndex: 2, transformOrigin: "top center", animation: "flipBot 0.5s ease-out 0.25s forwards", transform: "rotateX(90deg)", boxShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
+        <div style={{ ...half, bottom: 0, background: "#f8f8f8", borderRadius: `0 0 ${r}px ${r}px`, alignItems: "flex-start", zIndex: 2, transformOrigin: "top center", animation: "flipBot 0.5s ease-out 0.25s forwards", transform: "rotateX(90deg)", boxShadow: "0 1px 2px rgba(0,0,0,0.06)" }}>
           <span style={{ transform: "translateY(-50%)" }}>{display}</span>
         </div>
       )}
       {/* 中线 */}
-      <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 1, background: "rgba(15,32,39,0.8)", zIndex: 10 }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 1, background: "#ddd", zIndex: 10 }} />
     </div>
   );
 }
