@@ -86,7 +86,7 @@ export default function WelcomeScreen({ type = "checkin", dailyIncome, extra, da
       style={{
         position: "fixed",
         inset: 0,
-        background: "#faf9f7",
+        background: "#f8f5f0",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -147,7 +147,7 @@ export default function WelcomeScreen({ type = "checkin", dailyIncome, extra, da
       <div
         style={{
           fontSize: isMood ? 18 : 16,
-          color: "#8a7e6d",
+          color: "#9e9285",
           opacity: phase >= 1 ? 1 : 0,
           transform: phase >= 1 ? "translateY(0)" : "translateY(12px)",
           transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",

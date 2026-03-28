@@ -66,7 +66,7 @@ export default function DisplayMode({ data, onExit }) {
       style={{
         position: "fixed",
         inset: 0,
-        background: "#faf9f7",
+        background: "#f8f5f0",
         display: "flex",
         flexDirection: "column",
         cursor: "pointer",
@@ -85,7 +85,7 @@ export default function DisplayMode({ data, onExit }) {
           justifyContent: "space-between",
           fontFamily: "'SF Pro Display', -apple-system, sans-serif",
           fontSize: 14,
-          color: "#8a7e6d",
+          color: "#9e9285",
           letterSpacing: 1.5,
           flexShrink: 0,
           fontWeight: 500,
