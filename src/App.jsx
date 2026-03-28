@@ -517,12 +517,16 @@ export default function App() {
           <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 0 }}>
             <FlipDisplay value={needsSetup ? 0 : total} />
             {!needsSetup && (
-              <div style={{
-                marginTop: 12, fontSize: 14,
-                fontFamily: "'SF Pro Display', -apple-system, sans-serif",
-                fontWeight: 600,
-                color: info.net >= 0 ? C.green : C.red,
-              }}>
+              <div
+                key={info.net}
+                style={{
+                  marginTop: 12, fontSize: 14,
+                  fontFamily: "'SF Pro Display', -apple-system, sans-serif",
+                  fontWeight: 600,
+                  color: info.net >= 0 ? C.green : C.red,
+                  animation: "bounceIn 0.4s cubic-bezier(0.34,1.56,0.64,1)",
+                }}
+              >
                 今日 {info.net >= 0 ? "+" : "-"}{fmtNum(info.net)}
               </div>
             )}
@@ -552,18 +556,22 @@ export default function App() {
               {/* 回家打卡 */}
               <button className="action-btn" onClick={doCheckin} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(info.checkedIn ? { background: "rgba(90,158,120,0.12)", color: C.green } : {}),
+                ...(info.checkedIn ? { background: "rgba(90,158,120,0.12)", color: C.green, animation: "popIn 0.4s ease" } : {}),
               }}>
-                {info.checkedIn ? <IconCheckCircle size={22} color={C.green} /> : <IconHome size={22} color="#3d3225" />}
+                <span style={info.checkedIn ? { animation: "bounceIn 0.45s cubic-bezier(0.34,1.56,0.64,1)" } : {}}>
+                  {info.checkedIn ? <IconCheckCircle size={22} color={C.green} /> : <IconHome size={22} color="#3d3225" />}
+                </span>
                 <span style={{ fontSize: 13, fontWeight: 600 }}>{info.checkedIn ? "已打卡" : "回家"}</span>
               </button>
 
               {/* 弹琴打卡 */}
               <button className="action-btn" onClick={doGuitar} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(data.guitar?.[getToday()] ? { background: "rgba(148,117,194,0.12)", color: C.purple } : {}),
+                ...(data.guitar?.[getToday()] ? { background: "rgba(148,117,194,0.12)", color: C.purple, animation: "popIn 0.4s ease" } : {}),
               }}>
-                {data.guitar?.[getToday()] ? <IconCheckCircle size={22} color={C.purple} /> : <IconGuitar size={22} color={C.purple} />}
+                <span style={data.guitar?.[getToday()] ? { animation: "bounceIn 0.45s cubic-bezier(0.34,1.56,0.64,1)" } : {}}>
+                  {data.guitar?.[getToday()] ? <IconCheckCircle size={22} color={C.purple} /> : <IconGuitar size={22} color={C.purple} />}
+                </span>
                 <span style={{ fontSize: 13, fontWeight: 600 }}>
                   {data.guitar?.[getToday()] ? "已练琴" : "弹琴"}
                   <span style={{ fontSize: 11, color: C.dim, marginLeft: 4 }}>{weekGuitarCount}/{guitarGoal}</span>
@@ -573,9 +581,11 @@ export default function App() {
               {/* 锻炼打卡 */}
               <button className="action-btn" onClick={doExercise} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(data.exercise?.[getToday()] ? { background: "rgba(196,125,90,0.12)", color: C.orange } : {}),
+                ...(data.exercise?.[getToday()] ? { background: "rgba(196,125,90,0.12)", color: C.orange, animation: "popIn 0.4s ease" } : {}),
               }}>
-                {data.exercise?.[getToday()] ? <IconCheckCircle size={22} color={C.orange} /> : <IconDumbbell size={22} color={C.orange} />}
+                <span style={data.exercise?.[getToday()] ? { animation: "bounceIn 0.45s cubic-bezier(0.34,1.56,0.64,1)" } : {}}>
+                  {data.exercise?.[getToday()] ? <IconCheckCircle size={22} color={C.orange} /> : <IconDumbbell size={22} color={C.orange} />}
+                </span>
                 <span style={{ fontSize: 13, fontWeight: 600 }}>
                   {data.exercise?.[getToday()] ? "已锻炼" : "锻炼"}
                   <span style={{ fontSize: 10, color: C.dim, marginLeft: 3 }}>{weekExerciseCount}/{exerciseGoal}</span>
@@ -585,9 +595,11 @@ export default function App() {
               {/* 早睡打卡 */}
               <button className="action-btn" onClick={doSleep} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(data.sleep?.[getToday()] ? { background: "rgba(104,120,184,0.12)", color: C.indigo } : {}),
+                ...(data.sleep?.[getToday()] ? { background: "rgba(104,120,184,0.12)", color: C.indigo, animation: "popIn 0.4s ease" } : {}),
               }}>
-                {data.sleep?.[getToday()] ? <IconCheckCircle size={22} color={C.indigo} /> : <IconMoon size={22} color={C.indigo} />}
+                <span style={data.sleep?.[getToday()] ? { animation: "bounceIn 0.45s cubic-bezier(0.34,1.56,0.64,1)" } : {}}>
+                  {data.sleep?.[getToday()] ? <IconCheckCircle size={22} color={C.indigo} /> : <IconMoon size={22} color={C.indigo} />}
+                </span>
                 <span style={{ fontSize: 13, fontWeight: 600 }}>{data.sleep?.[getToday()] ? (data.sleep[getToday()].valid ? "已早睡" : "晚了") : "早睡"}</span>
               </button>
             </div>
@@ -643,6 +655,7 @@ export default function App() {
           <div style={{
             background: "#f8f5f0", borderRadius: 20, padding: "28px 24px", width: "90%", maxWidth: 360,
             boxShadow: "0 20px 60px rgba(61,50,37,0.15)",
+            animation: "slideUp 0.32s cubic-bezier(0.34, 1.4, 0.64, 1)",
           }}>
             {/* 今日净收入 */}
             <div style={{ textAlign: "center", marginBottom: 24 }}>
@@ -696,6 +709,7 @@ export default function App() {
           <div style={{
             background: "#f8f5f0", borderRadius: 20, padding: "28px 24px", width: "90%", maxWidth: 360,
             boxShadow: "0 20px 60px rgba(61,50,37,0.15)",
+            animation: "slideUp 0.32s cubic-bezier(0.34, 1.4, 0.64, 1)",
           }}>
             <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 20, textAlign: "center" }}>记录收入</div>
             <div style={{ display: "flex", gap: 10, marginBottom: 14 }}>
@@ -938,7 +952,7 @@ export default function App() {
                   暂无记录
                 </div>
               );
-            return sorted.map((date) => {
+            return sorted.map((date, idx) => {
               const checked = !!data.checkins?.[date];
               const extras = data.extraIncomes?.[date]?.items || [];
               const items = data.expenses?.[date]?.items || [];
@@ -947,7 +961,7 @@ export default function App() {
               const exp = items.reduce((s, i) => s + i.amount, 0);
               const net = inc + extraTotal - exp;
               return (
-                <div key={date} className="card">
+                <div key={date} className="card" style={{ animation: `cardIn 0.3s ease ${Math.min(idx * 0.05, 0.3)}s both` }}>
                   <div
                     style={{
                       display: "flex",
@@ -1154,6 +1168,7 @@ export default function App() {
                 display: "flex", justifyContent: "space-between", padding: "8px 0",
                 borderBottom: i < Math.min(19, (data.rewards?.history || []).length - 1) ? "1px solid rgba(61,50,37,0.06)" : "none",
                 fontSize: 13,
+                animation: `cardIn 0.25s ease ${Math.min(i * 0.04, 0.3)}s both`,
               }}>
                 <div>
                   <div>{h.note}</div>
