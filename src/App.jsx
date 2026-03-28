@@ -393,8 +393,8 @@ export default function App() {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
-          background: "#faf9f7",
-          color: "#888",
+          background: "#0f2027",
+          color: "#8fa8b7",
           fontSize: 15,
         }}
       >
@@ -438,15 +438,15 @@ export default function App() {
   const checkinCount = Object.keys(data.checkins || {}).length;
 
   const C = {
-    dim: "#8a7e6d",
-    red: "#c4564a",
-    green: "#4a9e6b",
-    cyan: "#2c2417",
-    text: "#2c2417",
-    purple: "#8b6caf",
-    indigo: "#5b6dab",
-    orange: "#c8956c",
-    blue: "#2c2417",
+    dim: "#8fa8b7",
+    red: "#e63946",
+    green: "#4ecdc4",
+    cyan: "#e8edf0",
+    text: "#e8edf0",
+    purple: "#a78bfa",
+    indigo: "#7c9ef5",
+    orange: "#f0a050",
+    blue: "#e8edf0",
   };
 
   // 奖励等级
@@ -485,7 +485,7 @@ export default function App() {
                 <div style={{ display: "flex", gap: 6 }}>
                   <button onClick={() => doMood("happy")} style={{
                     width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
-                    background: data.mood?.[getToday()] === "happy" ? "rgba(74,158,107,0.15)" : "#f0ece5",
+                    background: data.mood?.[getToday()] === "happy" ? "rgba(78,205,196,0.15)" : "rgba(30,74,90,0.4)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: 22, transition: "all 0.2s",
                     transform: data.mood?.[getToday()] === "happy" ? "scale(1.1)" : "scale(1)",
@@ -494,7 +494,7 @@ export default function App() {
                   </button>
                   <button onClick={() => doMood("sad")} style={{
                     width: 40, height: 40, borderRadius: "50%", border: "none", cursor: "pointer",
-                    background: data.mood?.[getToday()] === "sad" ? "rgba(91,109,171,0.15)" : "#f0ece5",
+                    background: data.mood?.[getToday()] === "sad" ? "rgba(124,158,245,0.15)" : "rgba(30,74,90,0.4)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: 22, transition: "all 0.2s",
                     transform: data.mood?.[getToday()] === "sad" ? "scale(1.1)" : "scale(1)",
@@ -549,16 +549,16 @@ export default function App() {
               {/* 回家打卡 */}
               <button className="action-btn" onClick={doCheckin} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(info.checkedIn ? { background: "rgba(74,158,107,0.08)", border: "1px solid rgba(74,158,107,0.25)", color: C.green } : {}),
+                ...(info.checkedIn ? { background: "rgba(78,205,196,0.1)", border: "1px solid rgba(78,205,196,0.3)", color: C.green } : {}),
               }}>
-                {info.checkedIn ? <IconCheckCircle size={22} color={C.green} /> : <IconHome size={22} color="#2c2417" />}
+                {info.checkedIn ? <IconCheckCircle size={22} color={C.green} /> : <IconHome size={22} color="#e8edf0" />}
                 <span style={{ fontSize: 13, fontWeight: 600 }}>{info.checkedIn ? "已打卡" : "回家"}</span>
               </button>
 
               {/* 弹琴打卡 */}
               <button className="action-btn" onClick={doGuitar} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(data.guitar?.[getToday()] ? { background: "rgba(139,108,175,0.08)", border: "1px solid rgba(139,108,175,0.25)", color: C.purple } : {}),
+                ...(data.guitar?.[getToday()] ? { background: "rgba(167,139,250,0.1)", border: "1px solid rgba(167,139,250,0.3)", color: C.purple } : {}),
               }}>
                 {data.guitar?.[getToday()] ? <IconCheckCircle size={22} color={C.purple} /> : <IconGuitar size={22} color={C.purple} />}
                 <span style={{ fontSize: 13, fontWeight: 600 }}>
@@ -570,9 +570,9 @@ export default function App() {
               {/* 锻炼打卡 */}
               <button className="action-btn" onClick={doExercise} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(data.exercise?.[getToday()] ? { background: "rgba(200,149,108,0.08)", border: "1px solid rgba(200,149,108,0.25)", color: "#c8956c" } : {}),
+                ...(data.exercise?.[getToday()] ? { background: "rgba(240,160,80,0.1)", border: "1px solid rgba(240,160,80,0.3)", color: C.orange } : {}),
               }}>
-                {data.exercise?.[getToday()] ? <IconCheckCircle size={22} color="#c8956c" /> : <IconDumbbell size={22} color="#c8956c" />}
+                {data.exercise?.[getToday()] ? <IconCheckCircle size={22} color={C.orange} /> : <IconDumbbell size={22} color={C.orange} />}
                 <span style={{ fontSize: 13, fontWeight: 600 }}>
                   {data.exercise?.[getToday()] ? "已锻炼" : "锻炼"}
                   <span style={{ fontSize: 10, color: C.dim, marginLeft: 3 }}>{weekExerciseCount}/{exerciseGoal}</span>
@@ -582,7 +582,7 @@ export default function App() {
               {/* 早睡打卡 */}
               <button className="action-btn" onClick={doSleep} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
-                ...(data.sleep?.[getToday()] ? { background: "rgba(91,109,171,0.08)", border: "1px solid rgba(91,109,171,0.25)", color: C.indigo } : {}),
+                ...(data.sleep?.[getToday()] ? { background: "rgba(124,158,245,0.1)", border: "1px solid rgba(124,158,245,0.3)", color: C.indigo } : {}),
               }}>
                 {data.sleep?.[getToday()] ? <IconCheckCircle size={22} color={C.indigo} /> : <IconMoon size={22} color={C.indigo} />}
                 <span style={{ fontSize: 13, fontWeight: 600 }}>{data.sleep?.[getToday()] ? (data.sleep[getToday()].valid ? "已早睡" : "晚了") : "早睡"}</span>
@@ -610,11 +610,11 @@ export default function App() {
             )}
             <button className="nav-btn" style={{ padding: "12px 8px", fontSize: 12 }}
               onClick={() => { setSettingsForm({ income: String(data.settings.dailyIncome || ""), savings: String(data.totalSavings || "") }); setView("settings"); }}>
-              <IconSettings size={18} color="#888" /> 设置
+              <IconSettings size={18} color="#8fa8b7" /> 设置
             </button>
             <button className="nav-btn" style={{ padding: "12px 8px", fontSize: 12 }}
               onClick={() => setView("history")}>
-              <IconHistory size={18} color="#888" /> 历史
+              <IconHistory size={18} color="#8fa8b7" /> 历史
             </button>
             <button className="nav-btn" style={{ padding: "12px 8px", fontSize: 12 }}
               onClick={() => setView("rewards")}>
@@ -632,14 +632,14 @@ export default function App() {
         const netAfter = todayInfo.income - todayInfo.expense - pendingAmt;
         return (
         <div style={{
-          position: "fixed", inset: 0, background: "rgba(44,36,23,0.35)",
+          position: "fixed", inset: 0, background: "rgba(5,15,20,0.7)",
           display: "flex", alignItems: "center", justifyContent: "center",
           zIndex: 100, animation: "fadeIn 0.2s ease",
           padding: SAFE_AREA_PADDING,
         }} onClick={(e) => { if (e.target === e.currentTarget) setView("home"); }}>
           <div style={{
-            background: "#faf9f7", borderRadius: 20, padding: "28px 24px", width: "90%", maxWidth: 360,
-            boxShadow: "0 20px 60px rgba(44,36,23,0.12)",
+            background: "#13303d", borderRadius: 20, padding: "28px 24px", width: "90%", maxWidth: 360,
+            boxShadow: "0 20px 60px rgba(0,0,0,0.4)", border: "1px solid #1e4a5a",
           }}>
             {/* 今日净收入 */}
             <div style={{ textAlign: "center", marginBottom: 24 }}>
@@ -685,14 +685,14 @@ export default function App() {
       {/* ═══ 记录额外收入（弹窗） ═══ */}
       {view === "addIncome" && (
         <div style={{
-          position: "fixed", inset: 0, background: "rgba(44,36,23,0.35)",
+          position: "fixed", inset: 0, background: "rgba(5,15,20,0.7)",
           display: "flex", alignItems: "center", justifyContent: "center",
           zIndex: 100, animation: "fadeIn 0.2s ease",
           padding: SAFE_AREA_PADDING,
         }} onClick={(e) => { if (e.target === e.currentTarget) setView("home"); }}>
           <div style={{
-            background: "#faf9f7", borderRadius: 20, padding: "28px 24px", width: "90%", maxWidth: 360,
-            boxShadow: "0 20px 60px rgba(44,36,23,0.12)",
+            background: "#13303d", borderRadius: 20, padding: "28px 24px", width: "90%", maxWidth: 360,
+            boxShadow: "0 20px 60px rgba(0,0,0,0.4)", border: "1px solid #1e4a5a",
           }}>
             <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 20, textAlign: "center" }}>记录收入</div>
             <div style={{ display: "flex", gap: 10, marginBottom: 14 }}>
@@ -791,7 +791,7 @@ export default function App() {
           {/* 统计 */}
           <div className="card">
             <div className="section-title">
-              <IconBarChart size={18} color="#888" />
+              <IconBarChart size={18} color="#8fa8b7" />
               统计
             </div>
             <div
@@ -803,7 +803,7 @@ export default function App() {
             >
               <div
                 style={{
-                  background: "#f7f7f8",
+                  background: "#0a1a22",
                   borderRadius: 12,
                   padding: 14,
                   textAlign: "center",
@@ -824,7 +824,7 @@ export default function App() {
               </div>
               <div
                 style={{
-                  background: "#f7f7f8",
+                  background: "#0a1a22",
                   borderRadius: 12,
                   padding: 14,
                   textAlign: "center",
@@ -846,7 +846,7 @@ export default function App() {
               </div>
               <div
                 style={{
-                  background: "#f7f7f8",
+                  background: "#0a1a22",
                   borderRadius: 12,
                   padding: 14,
                   textAlign: "center",
@@ -883,7 +883,7 @@ export default function App() {
             <div
               style={{
                 fontSize: 12,
-                color: C.red,
+                color: "#e63946",
                 marginBottom: 12,
                 fontWeight: 500,
               }}
@@ -982,7 +982,7 @@ export default function App() {
                         color: C.green,
                         borderBottom:
                           extras.length || items.length
-                            ? "1px solid rgba(44,36,23,0.06)"
+                            ? "1px solid rgba(30,74,90,0.4)"
                             : "none",
                       }}
                     >
@@ -1013,7 +1013,7 @@ export default function App() {
                         color: C.green,
                         borderBottom:
                           i < extras.length - 1 || items.length
-                            ? "1px solid rgba(44,36,23,0.06)"
+                            ? "1px solid rgba(30,74,90,0.4)"
                             : "none",
                       }}
                     >
@@ -1056,7 +1056,7 @@ export default function App() {
                         padding: "8px 0",
                         borderBottom:
                           i < items.length - 1
-                            ? "1px solid rgba(44,36,23,0.06)"
+                            ? "1px solid rgba(30,74,90,0.4)"
                             : "none",
                         fontSize: 14,
                       }}
@@ -1103,20 +1103,20 @@ export default function App() {
 
           {/* 积分总览 */}
           <div className="card" style={{ textAlign: "center", padding: "32px 20px" }}>
-            <div style={{ fontSize: 48, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: "#1a1a1a" }}>
+            <div style={{ fontSize: 48, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: "#ffffff" }}>
               {data.rewards?.totalPoints || 0}
             </div>
             <div style={{ fontSize: 13, color: C.dim, marginTop: 4 }}>总积分</div>
-            <div style={{ marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 16px", borderRadius: 20, background: `${level.color}15`, color: level.color, fontSize: 13, fontWeight: 600 }}>
+            <div style={{ marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 16px", borderRadius: 20, background: `${level.color}22`, color: level.color, fontSize: 13, fontWeight: 600 }}>
               <IconTrophy size={14} color={level.color} />
               {level.name}
             </div>
             {level.next && (
               <div style={{ marginTop: 12 }}>
-                <div style={{ height: 4, borderRadius: 2, background: "#f0f0f0", overflow: "hidden" }}>
+                <div style={{ height: 4, borderRadius: 2, background: "#1e4a5a", overflow: "hidden" }}>
                   <div style={{ height: "100%", width: `${level.progress * 100}%`, background: level.color, borderRadius: 2, transition: "width 0.3s" }} />
                 </div>
-                <div style={{ fontSize: 11, color: "#bbb", marginTop: 4 }}>距离下一等级还需 {level.next - (data.rewards?.totalPoints || 0)} 分</div>
+                <div style={{ fontSize: 11, color: "#5a7a8a", marginTop: 4 }}>距离下一等级还需 {level.next - (data.rewards?.totalPoints || 0)} 分</div>
               </div>
             )}
           </div>
@@ -1149,18 +1149,18 @@ export default function App() {
             {(data.rewards?.history || []).slice(-20).reverse().map((h, i) => (
               <div key={i} style={{
                 display: "flex", justifyContent: "space-between", padding: "8px 0",
-                borderBottom: i < Math.min(19, (data.rewards?.history || []).length - 1) ? "1px solid rgba(44,36,23,0.06)" : "none",
+                borderBottom: i < Math.min(19, (data.rewards?.history || []).length - 1) ? "1px solid rgba(30,74,90,0.4)" : "none",
                 fontSize: 13,
               }}>
                 <div>
                   <div>{h.note}</div>
-                  <div style={{ fontSize: 11, color: "#bbb" }}>{h.date}</div>
+                  <div style={{ fontSize: 11, color: "#5a7a8a" }}>{h.date}</div>
                 </div>
                 <span style={{ color: C.green, fontFamily: "'SF Pro Display', -apple-system, sans-serif", fontWeight: 600 }}>+{h.points}</span>
               </div>
             ))}
             {(!data.rewards?.history || data.rewards.history.length === 0) && (
-              <div style={{ textAlign: "center", color: "#bbb", padding: 20, fontSize: 13 }}>暂无记录</div>
+              <div style={{ textAlign: "center", color: "#5a7a8a", padding: 20, fontSize: 13 }}>暂无记录</div>
             )}
           </div>
         </div>
