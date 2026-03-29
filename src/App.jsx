@@ -650,6 +650,7 @@ export default function App() {
           position: "fixed", inset: 0, background: "rgba(61,50,37,0.4)",
           display: "flex", alignItems: "center", justifyContent: "center",
           zIndex: 100, animation: "fadeIn 0.2s ease",
+          overscrollBehavior: "contain",
           padding: SAFE_AREA_PADDING,
         }} onClick={(e) => { if (e.target === e.currentTarget) setView("home"); }}>
           <div style={{
@@ -704,6 +705,7 @@ export default function App() {
           position: "fixed", inset: 0, background: "rgba(61,50,37,0.4)",
           display: "flex", alignItems: "center", justifyContent: "center",
           zIndex: 100, animation: "fadeIn 0.2s ease",
+          overscrollBehavior: "contain",
           padding: SAFE_AREA_PADDING,
         }} onClick={(e) => { if (e.target === e.currentTarget) setView("home"); }}>
           <div style={{

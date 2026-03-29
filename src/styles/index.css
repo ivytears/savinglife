@@ -3,12 +3,14 @@
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 html, body {
   font-family: 'Noto Sans SC', 'PingFang SC', -apple-system, sans-serif;
   background: #f8f5f0;
   color: #3d3225;
+  color-scheme: light;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -66,8 +68,13 @@ html, body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* 数字对齐：价格、统计、积分等数字列 */
+.app-container {
+  font-variant-numeric: tabular-nums;
+}
+
 /* 通用 */
-input:focus {
+input:focus-visible {
   border-color: #c47d5a !important;
   box-shadow: 0 0 0 3px rgba(196,125,90,0.1);
 }
@@ -293,6 +300,7 @@ input:focus {
   font-weight: 700;
   letter-spacing: 0.3px;
   color: #3d3225;
+  text-wrap: balance;
 }
 
 /* 分段标题 */
