@@ -2,34 +2,29 @@
   <!-- Background: deep brown like old record sleeve -->
   <rect width="1024" height="1024" rx="224" fill="#6B5B4E"/>
 
-  <!-- Plucked string waveform: shifted down to visual center -->
+  <!-- Plucked string waveform: bold, edge-to-edge, visible at 60px -->
   <path d="
-    M 130,495
-    Q 160,495 190,495
-    Q 220,495 250,492
-    Q 280,488 300,482
-    Q 320,475 340,462
-    Q 360,448 380,428
-    Q 400,408 420,380
-    Q 440,352 460,325
-    Q 480,298 500,290
-    Q 520,282 535,315
-    Q 550,348 565,400
-    Q 580,452 595,500
-    Q 610,548 625,570
-    Q 640,592 655,580
-    Q 670,568 682,545
-    Q 694,522 706,505
-    Q 718,488 730,488
-    Q 742,488 752,498
-    Q 762,508 770,512
-    Q 778,516 788,512
-    Q 798,508 806,502
-    Q 814,496 824,495
-    Q 840,494 860,495
-    Q 890,495 920,495
-  " fill="none" stroke="#F5F0EB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    M 60,500
+    Q 100,500 140,498
+    Q 180,494 220,480
+    Q 260,462 300,430
+    Q 340,395 380,345
+    Q 420,295 455,260
+    Q 490,230 512,225
+    Q 535,220 555,270
+    Q 575,320 600,400
+    Q 625,480 650,540
+    Q 675,600 700,610
+    Q 725,620 748,590
+    Q 770,560 790,530
+    Q 810,500 830,500
+    Q 850,500 865,515
+    Q 880,530 892,530
+    Q 904,530 916,520
+    Q 928,510 945,505
+    Q 960,502 980,500
+  " fill="none" stroke="#F5F0EB" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Amber rivet dot: smaller, muted -->
-  <circle cx="512" cy="655" r="10" fill="#8B7335"/>
+  <!-- Amber rivet dot: visible at small size -->
+  <circle cx="512" cy="680" r="18" fill="#8B7335"/>
 </svg>
