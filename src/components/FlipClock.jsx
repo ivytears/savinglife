@@ -40,6 +40,7 @@ function FlipDigit({ char, scale = 1 }) {
     fontSize: fs,
     fontWeight: 700,
     fontFamily: "-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif",
+    letterSpacing: "-0.02em",
     backfaceVisibility: "hidden",
     color: "#1a1a1a",
   };

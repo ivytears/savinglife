@@ -474,7 +474,7 @@ export default function App() {
           <div style={{
             padding: "16px 0 8px",
             paddingTop: "max(16px, env(safe-area-inset-top, 0px))",
-            fontSize: 13, color: C.dim, letterSpacing: 0.3,
+            fontSize: 13, color: C.dim, letterSpacing: "0.02em",
             fontFamily: "'SF Pro Display', -apple-system, sans-serif",
             display: "flex", justifyContent: "space-between", alignItems: "center",
             fontWeight: 500,
@@ -661,7 +661,7 @@ export default function App() {
             <div style={{ textAlign: "center", marginBottom: 24 }}>
               <div style={{ fontSize: 12, color: C.dim, marginBottom: 8 }}>今日实际收入</div>
               <div style={{
-                fontSize: 42, fontWeight: 700,
+                fontSize: 42, fontWeight: 700, letterSpacing: "-0.02em",
                 fontFamily: "'SF Pro Display', -apple-system, sans-serif",
                 color: netAfter >= 0 ? C.green : C.red,
                 lineHeight: 1,
@@ -1120,7 +1120,7 @@ export default function App() {
 
           {/* 积分总览 */}
           <div className="card" style={{ textAlign: "center", padding: "32px 20px" }}>
-            <div style={{ fontSize: 52, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: "#3d3225", lineHeight: 1 }}>
+            <div style={{ fontSize: 52, fontWeight: 700, letterSpacing: "-0.02em", fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: "#3d3225", lineHeight: 1 }}>
               {data.rewards?.totalPoints || 0}
             </div>
             <div style={{ fontSize: 12, color: C.dim, marginTop: 6, letterSpacing: 0.5 }}>总积分</div>
@@ -1149,28 +1149,28 @@ export default function App() {
               <div style={{ padding: "8px 0" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
                   <IconGuitar size={15} color={C.purple} />
-                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.purple }}>{Object.keys(data.guitar || {}).length}</div>
+                  <div style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.01em", fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.purple }}>{Object.keys(data.guitar || {}).length}</div>
                 </div>
                 <div style={{ fontSize: 11, color: C.dim }}>弹琴总次数</div>
               </div>
               <div style={{ padding: "8px 0" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
                   <IconDumbbell size={15} color={C.orange} />
-                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.orange }}>{Object.keys(data.exercise || {}).length}</div>
+                  <div style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.01em", fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.orange }}>{Object.keys(data.exercise || {}).length}</div>
                 </div>
                 <div style={{ fontSize: 11, color: C.dim }}>锻炼总次数</div>
               </div>
               <div style={{ padding: "8px 0" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
                   <IconMoon size={15} color={C.indigo} />
-                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.indigo }}>{Object.values(data.sleep || {}).filter(s => s.valid).length}</div>
+                  <div style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.01em", fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.indigo }}>{Object.values(data.sleep || {}).filter(s => s.valid).length}</div>
                 </div>
                 <div style={{ fontSize: 11, color: C.dim }}>早睡总天数</div>
               </div>
               <div style={{ padding: "8px 0" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 6 }}>
                   <IconCheckCircle size={15} color={C.green} />
-                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.green }}>{getConsecutiveSleepDays(data)}</div>
+                  <div style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.01em", fontFamily: "'SF Pro Display', -apple-system, sans-serif", color: C.green }}>{getConsecutiveSleepDays(data)}</div>
                 </div>
                 <div style={{ fontSize: 11, color: C.dim }}>连续早睡</div>
               </div>
