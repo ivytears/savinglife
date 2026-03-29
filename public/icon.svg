@@ -2,37 +2,34 @@
   <!-- Background: deep brown like old record sleeve -->
   <rect width="1024" height="1024" rx="224" fill="#6B5B4E"/>
 
-  <!-- Plucked string waveform: damped vibration centered -->
-  <!-- Left side: small ripples growing toward center -->
-  <!-- Center: maximum amplitude -->
-  <!-- Right side: small ripples decaying from center -->
+  <!-- Plucked string waveform: shifted down to visual center -->
   <path d="
-    M 130,455
-    Q 160,455 190,455
-    Q 220,455 250,452
-    Q 280,448 300,442
-    Q 320,435 340,422
-    Q 360,408 380,388
-    Q 400,368 420,340
-    Q 440,312 460,285
-    Q 480,258 500,250
-    Q 520,242 535,275
-    Q 550,308 565,360
-    Q 580,412 595,460
-    Q 610,508 625,530
-    Q 640,552 655,540
-    Q 670,528 682,505
-    Q 694,482 706,465
-    Q 718,448 730,448
-    Q 742,448 752,458
-    Q 762,468 770,472
-    Q 778,476 788,472
-    Q 798,468 806,462
-    Q 814,456 824,455
-    Q 840,454 860,455
-    Q 890,455 920,455
+    M 130,495
+    Q 160,495 190,495
+    Q 220,495 250,492
+    Q 280,488 300,482
+    Q 320,475 340,462
+    Q 360,448 380,428
+    Q 400,408 420,380
+    Q 440,352 460,325
+    Q 480,298 500,290
+    Q 520,282 535,315
+    Q 550,348 565,400
+    Q 580,452 595,500
+    Q 610,548 625,570
+    Q 640,592 655,580
+    Q 670,568 682,545
+    Q 694,522 706,505
+    Q 718,488 730,488
+    Q 742,488 752,498
+    Q 762,508 770,512
+    Q 778,516 788,512
+    Q 798,508 806,502
+    Q 814,496 824,495
+    Q 840,494 860,495
+    Q 890,495 920,495
   " fill="none" stroke="#F5F0EB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Amber rivet dot -->
-  <circle cx="512" cy="620" r="15" fill="#B8860B"/>
+  <!-- Amber rivet dot: smaller, muted -->
+  <circle cx="512" cy="655" r="10" fill="#8B7335"/>
 </svg>
