@@ -1,7 +1,7 @@
 {
-  "name": "储蓄翻页钟",
-  "short_name": "储蓄钟",
-  "description": "储蓄金额实时展示 — 翻页钟风格",
+  "name": "SavingLife",
+  "short_name": "SavingLife",
+  "description": "Daily savings tracker with flip clock display",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f8f5f0",

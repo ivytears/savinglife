@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="12" fill="#faf9f6"/>
-  <text x="50" y="68" font-size="60" text-anchor="middle" font-family="monospace" font-weight="bold" fill="#2a2a28">¥</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#f8f5f0"/>
+  <!-- Flip clock card top -->
+  <rect x="96" y="120" width="320" height="120" rx="16" fill="#fff"/>
+  <!-- Flip clock card bottom -->
+  <rect x="96" y="244" width="320" height="120" rx="16" fill="#f0ebe3"/>
+  <!-- Center divider line -->
+  <line x1="96" y1="242" x2="416" y2="242" stroke="#e2dbd0" stroke-width="2"/>
+  <!-- Dollar sign / number -->
+  <text x="256" y="310" font-size="180" text-anchor="middle" font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-weight="700" fill="#3d3225" letter-spacing="-0.02em">$</text>
+  <!-- Terracotta accent dot -->
+  <circle cx="256" cy="408" r="20" fill="#c47d5a"/>
 </svg>
