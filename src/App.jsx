@@ -523,7 +523,7 @@ export default function App() {
 
       {/* ═══ 首页 ═══ */}
       {view === "home" && (
-        <div style={{ display: "flex", flexDirection: "column", height: "100dvh", padding: "0 0 8px", overflow: "hidden" }}>
+        <div style={{ display: "flex", flexDirection: "column", height: "100%", padding: "0 0 8px", overflow: "hidden" }}>
 
           {/* 顶栏：日期 + 心情 + 积分 */}
           <div style={{
