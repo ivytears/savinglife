@@ -189,6 +189,25 @@ export default function App() {
     flash("已撤销今日打卡");
   };
 
+  // ─── 撤销弹琴 ───
+  const undoGuitar = () => {
+    const today = getToday();
+    if (!data.guitar?.[today]) return;
+    const nd = { ...data, guitar: { ...data.guitar } };
+    delete nd.guitar[today];
+    // 回退积分：移除今天的 guitar 和 guitar_weekly 记录
+    const removedPts = (nd.rewards?.history || [])
+      .filter(h => h.date === today && (h.type === "guitar" || h.type === "guitar_weekly"))
+      .reduce((s, h) => s + h.points, 0);
+    nd.rewards = {
+      ...nd.rewards,
+      totalPoints: Math.max(0, (nd.rewards?.totalPoints || 0) - removedPts),
+      history: (nd.rewards?.history || []).filter(h => !(h.date === today && (h.type === "guitar" || h.type === "guitar_weekly"))),
+    };
+    save(nd);
+    flash("已撤销弹琴打卡");
+  };
+
   // ─── 弹琴打卡 ───
   const doGuitar = () => {
     const today = getToday();
@@ -215,6 +234,24 @@ export default function App() {
     setShowWelcome(true);
   };
 
+  // ─── 撤销早睡 ───
+  const undoSleep = () => {
+    const today = getToday();
+    if (!data.sleep?.[today]) return;
+    const nd = { ...data, sleep: { ...data.sleep } };
+    delete nd.sleep[today];
+    const removedPts = (nd.rewards?.history || [])
+      .filter(h => h.date === today && (h.type === "sleep" || h.type === "sleep_streak"))
+      .reduce((s, h) => s + h.points, 0);
+    nd.rewards = {
+      ...nd.rewards,
+      totalPoints: Math.max(0, (nd.rewards?.totalPoints || 0) - removedPts),
+      history: (nd.rewards?.history || []).filter(h => !(h.date === today && (h.type === "sleep" || h.type === "sleep_streak"))),
+    };
+    save(nd);
+    flash("已撤销早睡打卡");
+  };
+
   // ─── 早睡打卡 ───
   const doSleep = () => {
     const today = getToday();
@@ -236,6 +273,24 @@ export default function App() {
     setWelcomeType("sleep");
     setWelcomeExtra({ points, valid });
     setShowWelcome(true);
+  };
+
+  // ─── 撤销锻炼 ───
+  const undoExercise = () => {
+    const today = getToday();
+    if (!data.exercise?.[today]) return;
+    const nd = { ...data, exercise: { ...data.exercise } };
+    delete nd.exercise[today];
+    const removedPts = (nd.rewards?.history || [])
+      .filter(h => h.date === today && (h.type === "exercise" || h.type === "exercise_weekly" || h.type === "exercise_super"))
+      .reduce((s, h) => s + h.points, 0);
+    nd.rewards = {
+      ...nd.rewards,
+      totalPoints: Math.max(0, (nd.rewards?.totalPoints || 0) - removedPts),
+      history: (nd.rewards?.history || []).filter(h => !(h.date === today && (h.type === "exercise" || h.type === "exercise_weekly" || h.type === "exercise_super"))),
+    };
+    save(nd);
+    flash("已撤销锻炼打卡");
   };
 
   // ─── 锻炼打卡 ───
@@ -554,7 +609,7 @@ export default function App() {
           {!needsSetup && (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
               {/* 回家打卡 */}
-              <button className="action-btn" onClick={doCheckin} style={{
+              <button className="action-btn" onClick={info.checkedIn ? () => { if (confirm("撤销今日回家打卡？")) undoCheckin(); } : doCheckin} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
                 ...(info.checkedIn ? { background: "rgba(90,158,120,0.12)", color: C.green, animation: "popIn 0.4s ease" } : {}),
               }}>
@@ -565,7 +620,7 @@ export default function App() {
               </button>
 
               {/* 弹琴打卡 */}
-              <button className="action-btn" onClick={doGuitar} style={{
+              <button className="action-btn" onClick={data.guitar?.[getToday()] ? () => { if (confirm("撤销今日弹琴打卡？")) undoGuitar(); } : doGuitar} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
                 ...(data.guitar?.[getToday()] ? { background: "rgba(148,117,194,0.12)", color: C.purple, animation: "popIn 0.4s ease" } : {}),
               }}>
@@ -579,7 +634,7 @@ export default function App() {
               </button>
 
               {/* 锻炼打卡 */}
-              <button className="action-btn" onClick={doExercise} style={{
+              <button className="action-btn" onClick={data.exercise?.[getToday()] ? () => { if (confirm("撤销今日锻炼打卡？")) undoExercise(); } : doExercise} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
                 ...(data.exercise?.[getToday()] ? { background: "rgba(196,125,90,0.12)", color: C.orange, animation: "popIn 0.4s ease" } : {}),
               }}>
@@ -593,7 +648,7 @@ export default function App() {
               </button>
 
               {/* 早睡打卡 */}
-              <button className="action-btn" onClick={doSleep} style={{
+              <button className="action-btn" onClick={data.sleep?.[getToday()] ? () => { if (confirm("撤销今日早睡打卡？")) undoSleep(); } : doSleep} style={{
                 flex: 1, flexDirection: "row", padding: "14px 12px", gap: 8,
                 ...(data.sleep?.[getToday()] ? { background: "rgba(104,120,184,0.12)", color: C.indigo, animation: "popIn 0.4s ease" } : {}),
               }}>
