@@ -450,7 +450,7 @@ export default function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
+          height: "100dvh",
           background: "#f8f5f0",
           color: "#9e9285",
           fontSize: 15,
@@ -523,7 +523,7 @@ export default function App() {
 
       {/* ═══ 首页 ═══ */}
       {view === "home" && (
-        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", padding: "0 0 8px" }}>
+        <div style={{ display: "flex", flexDirection: "column", height: "100dvh", padding: "0 0 8px", overflow: "hidden" }}>
 
           {/* 顶栏：日期 + 心情 + 积分 */}
           <div style={{

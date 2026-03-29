@@ -81,7 +81,7 @@ input:focus-visible {
 
 /* 应用容器 */
 .app-container {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: #f8f5f0;
   color: #3d3225;
   font-family: 'Noto Sans SC', 'PingFang SC', -apple-system, sans-serif;
