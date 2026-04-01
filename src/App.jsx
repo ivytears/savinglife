@@ -71,12 +71,16 @@ export default function App() {
     let wType = null;
     let wExtra = {};
 
+    let dupToast = null;
+
     if (action === "checkin") {
       if (!d.checkins?.[today] && d.settings.dailyIncome > 0) {
         const income = d.settings.dailyIncome;
         d = { ...d, checkins: { ...d.checkins, [today]: true }, totalSavings: (d.totalSavings || 0) + income, todayIncome: (d.todayIncome || 0) + income, todayDate: today };
         saveData(d);
         wType = "checkin";
+      } else if (d.checkins?.[today]) {
+        dupToast = "今天已经打过卡了";
       }
     } else if (action === "guitar") {
       if (!d.guitar?.[today]) {
@@ -96,6 +100,8 @@ export default function App() {
         saveData(d);
         wType = "guitar";
         wExtra = { points, weekInfo: `本周 ${weekCount}/${goal}` };
+      } else {
+        dupToast = `今天已经弹过琴了 ${d.guitar[today].time}`;
       }
     } else if (action === "mood_happy") {
       d = { ...d, mood: { ...d.mood, [today]: "happy" } };
@@ -122,6 +128,8 @@ export default function App() {
         saveData(d);
         wType = "sleep";
         wExtra = { points, valid };
+      } else {
+        dupToast = `今天已经打过早睡卡了 ${d.sleep[today].time}`;
       }
     } else if (action === "exercise") {
       if (!d.exercise?.[today]) {
@@ -140,12 +148,18 @@ export default function App() {
         saveData(d);
         wType = "exercise";
         wExtra = { points, weekInfo: `本周 ${weekCount}/${goal}` };
+      } else {
+        dupToast = `今天已经锻炼过了 ${d.exercise[today].time}`;
       }
     }
 
     // 一次性设置所有状态
     setData(d);
     setLoading(false);
+    if (dupToast) {
+      setToast(dupToast);
+      setTimeout(() => setToast(""), 2200);
+    }
     if (wType) {
       setWelcomeType(wType);
       setWelcomeExtra(wExtra);
@@ -994,6 +1008,10 @@ export default function App() {
               ...Object.keys(data.checkins || {}),
               ...Object.keys(data.expenses || {}),
               ...Object.keys(data.extraIncomes || {}),
+              ...Object.keys(data.guitar || {}),
+              ...Object.keys(data.sleep || {}),
+              ...Object.keys(data.exercise || {}),
+              ...Object.keys(data.mood || {}),
             ]);
             const sorted = [...allDates].sort().reverse();
             if (!sorted.length)
@@ -1013,6 +1031,10 @@ export default function App() {
               const checked = !!data.checkins?.[date];
               const extras = data.extraIncomes?.[date]?.items || [];
               const items = data.expenses?.[date]?.items || [];
+              const guitarInfo = data.guitar?.[date];
+              const sleepInfo = data.sleep?.[date];
+              const exerciseInfo = data.exercise?.[date];
+              const moodInfo = data.mood?.[date];
               const inc = checked ? (data.settings.dailyIncome || 0) : 0;
               const extraTotal = extras.reduce((s, i) => s + i.amount, 0);
               const exp = items.reduce((s, i) => s + i.amount, 0);
@@ -1040,6 +1062,11 @@ export default function App() {
                             verticalAlign: "middle",
                           }}
                         />
+                      )}
+                      {moodInfo && (
+                        <span style={{ marginLeft: 6, fontSize: 14, verticalAlign: "middle" }}>
+                          {moodInfo === "happy" ? "😊" : "🫂"}
+                        </span>
                       )}
                     </span>
                     <span style={{ color: net >= 0 ? C.green : C.red }}>
@@ -1129,7 +1156,7 @@ export default function App() {
                         alignItems: "center",
                         padding: "8px 0",
                         borderBottom:
-                          i < items.length - 1
+                          (i < items.length - 1 || guitarInfo || exerciseInfo || sleepInfo)
                             ? "1px solid rgba(61,50,37,0.06)"
                             : "none",
                         fontSize: 14,
@@ -1160,6 +1187,34 @@ export default function App() {
                       </div>
                     </div>
                   ))}
+                  {/* 习惯打卡明细 */}
+                  {guitarInfo && (
+                    <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", fontSize: 14, color: C.purple, borderBottom: (exerciseInfo || sleepInfo) ? "1px solid rgba(61,50,37,0.06)" : "none" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <IconGuitar size={14} color={C.purple} />
+                        弹琴
+                      </div>
+                      <span style={{ fontFamily: "'SF Pro Display', -apple-system, sans-serif", fontSize: 13 }}>{guitarInfo.time}</span>
+                    </div>
+                  )}
+                  {exerciseInfo && (
+                    <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", fontSize: 14, color: C.orange, borderBottom: sleepInfo ? "1px solid rgba(61,50,37,0.06)" : "none" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <IconDumbbell size={14} color={C.orange} />
+                        锻炼
+                      </div>
+                      <span style={{ fontFamily: "'SF Pro Display', -apple-system, sans-serif", fontSize: 13 }}>{exerciseInfo.time}</span>
+                    </div>
+                  )}
+                  {sleepInfo && (
+                    <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", fontSize: 14, color: sleepInfo.valid ? C.indigo : C.red }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <IconMoon size={14} color={sleepInfo.valid ? C.indigo : C.red} />
+                        {sleepInfo.valid ? "早睡" : "晚睡"}
+                      </div>
+                      <span style={{ fontFamily: "'SF Pro Display', -apple-system, sans-serif", fontSize: 13 }}>{sleepInfo.time}</span>
+                    </div>
+                  )}
                 </div>
               );
             });
