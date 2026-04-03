@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import FlipDisplay from "./FlipClock";
 import { calcTotal, getTodayInfo, fmtNum } from "../utils/calc";
 import { IconCheckCircle } from "./Icons";
+import { getDailyWord } from "../utils/dailyWords";
 
 export default function DisplayMode({ data, onExit }) {
   const [now, setNow] = useState(new Date());
@@ -109,6 +110,30 @@ export default function DisplayMode({ data, onExit }) {
         }}
       >
         <FlipDisplay value={total} maxHeight={clockHeight} />
+      </div>
+
+      {/* 小克的每日一句 */}
+      <div
+        style={{
+          textAlign: "center",
+          padding: "0 32px 8px",
+          flexShrink: 0,
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            fontFamily: "'SF Pro Text', -apple-system, sans-serif",
+            fontSize: 13,
+            fontWeight: 400,
+            color: "#b8ad9e",
+            letterSpacing: 0.3,
+            lineHeight: 1.6,
+            fontStyle: "italic",
+          }}
+        >
+          {getDailyWord(now)}
+        </p>
       </div>
 
       {/* 底栏：今日净值 + 状态 */}
